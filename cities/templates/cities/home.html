@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Города {% endblock %}
+
+{% block content %}
+   <h1 class="display-4">Города</h1>
+   <div class='row'>
+       <!--подстройка по размеру экрана-->
+       <div class="col-md-6">
+           <!--формируем список городов, то есть просто печатаем имена-->
+           {% for object in objects_list %}
+               <p>{{object.name}}</p>
+           {% endfor %}
+       </div>
+
+   </div>
+{% endblock %}
