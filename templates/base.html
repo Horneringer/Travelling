@@ -1,3 +1,5 @@
+<!--назеачаем алиас для адреса. чтобы по нему определять активна ли ссылка в данный момент или нет-->
+{% url 'city:home' as city_home_url %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,17 +14,55 @@
   </head>
 
   <body>
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <!--<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">Traveling</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-      <!-- Меняем имя на Города и в url пишем нужный home файл в пространстве имен city -->
+
+      Меняем имя на Города и в url пишем нужный home файл в пространстве имен city
+
       <a class="p-2 text-dark" href="{% url 'city:home'%}">Города</a>
       <a class="p-2 text-dark" href="#">Enterprise</a>
       <a class="p-2 text-dark" href="#">Support</a>
       <a class="p-2 text-dark" href="#">Pricing</a>
     </nav>
   <a class="btn btn-outline-primary" href="#">Sign up</a>
+  </div>-->
+
+  <!--оборачиваем панель в контейнер, меняем цвета -->
+  <div class = 'container'>
+  <nav class="navbar navbar-expand-lg navbar-dark border-bottom shadow-sm" style="background-color:#4B0082;" >
+  <a class="navbar-brand" href="#">Traveling</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <!--с помощью ml-auto делаем сдвиг менюшек панели от левого края вправо -->
+    <ul class="navbar-nav ml-auto">
+      <!--условие на активность/неактивность ссылки; сравнение идёт с алиасом -->
+      <li class="nav-item {%if request.path == city_home_url %}active {% endif %}">
+        <a class="nav-link" href="{% url 'city:home'%}">Города <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
   </div>
+</nav>
+  </div>
+
 
   <div class = 'container'>
 
