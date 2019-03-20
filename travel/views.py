@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 
-#render более продвинутый метод
+# render более продвинутый метод
 from django.shortcuts import render
 
 

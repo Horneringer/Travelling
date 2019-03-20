@@ -20,7 +20,7 @@ from .views import home_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     # прописываем путь для url, находящегося в cities с помощью функции include;
-    # в качестве аргументов указываем дерикторию и пространство имён
+    # в качестве аргументов указываем директорию и пространство имён
     path('cities', include(('cities.urls', 'city'))),
     path('', home_view, name='home')
 ]
