@@ -8,13 +8,30 @@ from django.views.generic.detail import DetailView
 # импортируем модель города
 from .models import City
 
+# ипортируем форму
+from .forms import HtmlForm
+
 
 # функция отображения
 
 def home(request):
+    # проверка данных, которые мы отправляем
+    # если форма не заполнена, получаем сообщение
+    if request.method == 'POST':
+        form = HtmlForm(request.POST or None)
+        if form.is_valid():
+            # печатаем, что получили из формы
+            print(form.cleaned_data)
+    form = HtmlForm()
+
+    # отслеживаем куда ушёл запрос с формы, выводим только название города
+    city = request.POST.get('name')
+    # print(city)
+
     # запрос к базе  на получение всех записей; формируем html-ответ данными cities
     cities = City.objects.all()
-    return render(request, 'cities/home.html', {'objects_list': cities})
+    # форму так же  указываем в контексте, добавляем в словарь
+    return render(request, 'cities/home.html', {'objects_list': cities, 'form': form})
 
 
 class CityDetailView(DetailView):
