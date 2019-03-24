@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+# общий url для всего проекта
 from django.contrib import admin
 from django.urls import path, include
 from .views import home_view
@@ -21,6 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # прописываем путь для url, находящегося в cities с помощью функции include;
     # в качестве аргументов указываем директорию и пространство имён
-    path('cities', include(('cities.urls', 'city'))),
+    path('cities/', include(('cities.urls', 'city'))),
     path('', home_view, name='home')
 ]

@@ -22,7 +22,7 @@ class CityDetailView(DetailView):
     # ему нужно
     queryset = City.objects.all()
 
-    # задаём имя для контекста; по умолчания object
+    # задаём имя для контекста (c каким именем мы будем отпарвлять данные для рендеринга); по умолчания object
 
     context_object_name = 'object'
 
