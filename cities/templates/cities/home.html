@@ -51,7 +51,7 @@
              <span class="step-links">
                 {% if objects_list.has_previous %}
                     <a href="?page=1">&laquo;</a>
-                    <a href="?page={{ objects_list.previous_page_number }}">previous</a>
+                    <a href="?page={{ objects_list.previous_page_number }}">Предыдущая</a>
                 {% endif %}
 
                 <span class="current">
@@ -59,7 +59,7 @@
                 </span>
 
                 {% if objects_list.has_next %}
-                    <a href="?page={{ objects_list.next_page_number }}">next</a>
+                    <a href="?page={{ objects_list.next_page_number }}">Следующая</a>
                     <a href="?page={{ objects_list.paginator.num_pages }}"> &raquo;</a>
                 {% endif %}
              </span>

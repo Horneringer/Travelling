@@ -26,6 +26,11 @@ from .forms import CityForm
 # добавляем функциб reverse-lazy
 from django.urls import reverse_lazy
 
+# добавляем класс для отображения сообщений(миксин)
+from django.contrib.messages.views import SuccessMessageMixin
+
+from django.contrib import messages
+
 
 # функция отображения домашней страницы
 
@@ -53,7 +58,7 @@ def home(request):
     page = request.GET.get('page')
     cities = paginator.get_page(page)
     # форму так же  указываем в контексте, добавляем в словарь
-    return render(request, 'cities/home.html', {'objects_list': cities,})
+    return render(request, 'cities/home.html', {'objects_list': cities, })
 
 
 # отображение страницы деталей для отдельной записи
@@ -71,8 +76,9 @@ class CityDetailView(DetailView):
     template_name = 'cities/detail.html'
 
 
-# отображение страницы создания новой записи
-class CityCreateView(CreateView):
+# отображение страницы создания новой записи;
+# созданный класс наследуется от миксина, который идёт обязательно ПЕРВЫМ параметром
+class CityCreateView(SuccessMessageMixin, CreateView):
     # привязываем модель к City
     model = City
 
@@ -85,10 +91,12 @@ class CityCreateView(CreateView):
 
     # функция возврата на домашнюю страницу(со списком городов) после успешного создания записи
     success_url = reverse_lazy('city:home')
+    # сообщение об успешном завершении операции
+    success_message = 'Город успешно добавлен!'
 
 
 # отображение страницы изменения записи
-class CityUpdateView(UpdateView):
+class CityUpdateView(SuccessMessageMixin, UpdateView):
     # привязываем модель к City
     model = City
 
@@ -101,9 +109,10 @@ class CityUpdateView(UpdateView):
 
     # функция возврата на домашнюю страницу(со списком городов) после успешного создания записи
     success_url = reverse_lazy('city:home')
+    success_message = 'Внесенные изменения сохранены!'
 
 
-# удаление записи
+# удаление записи; с удаление миксины не работают с шаблонами подтверждения? но работают несколько иначе с функцией ниже
 class CityDeleteView(DeleteView):
     model = City
     template_name = 'cities/delete.html'
@@ -112,5 +121,6 @@ class CityDeleteView(DeleteView):
     # если нет необходимости в подтверждении удаления, можно сделать так; без использования страницы подстверждения
     # cities/delete.html; так же иногда используется подтверждающий скрипт написанный на JS
 
-# def get(self, request, *args, **kwargs):
-# return self.post(request, request, *args, **kwargs)
+    '''def get(self, request, *args, **kwargs):
+        messages.success(request, 'Грод успешно удалён!')
+        return self.post(request, request, *args, **kwargs)'''

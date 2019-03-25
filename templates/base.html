@@ -64,6 +64,40 @@
   </div>
 
 
+  <div class = 'container my-4'>
+
+     <div class="row">
+
+       <div class="col-md-8 mx-auto">
+         <!--проверяется наличие сообщений, если они есть, то проходим по ним циклом-->
+         {%if messages%}
+         {%for message in messages%}
+         <!--проверяется уровень сообщения, если ERROR, то сообщение красное -->
+           {%if message.level == DEFAULT_MESSAGE_LEVEL.ERROR%}
+           <div class="alert alert-danger messages">
+
+             <span{%if message.tags%} class = '{{message.tags}}'{%endif%}>
+             Внимание! {{ message }} <br/>
+
+             </span>
+           </div>
+         <!--иначе сообщение зеленое и без предупреждений -->
+           {%else%}
+           <div class="alert alert-success messages">
+             <span{%if message.tags%} class = '{{message.tags}}'{%endif%}>
+             {{ message }} <br/>
+             </span>
+           </div>
+           {%endif%}
+         {%endfor%}
+         {%endif%}
+       </div>
+
+     </div>
+  </div>
+
+
+
   <div class = 'container'>
 
   {% block content %} {% endblock %}
