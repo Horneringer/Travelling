@@ -2,11 +2,17 @@
 # c таким же содержимым, что и одноименный
 from django.shortcuts import render
 
-# импортируем класс DetailView
+# импортируем класс DetailView для отображения деталей записи
 from django.views.generic.detail import DetailView
 
-# добавляем класс CreateView для возможности создания нового отображения
+# добавляем класс CreateView для возможности создания новой записи
 from django.views.generic.edit import CreateView
+
+# добавляем класс UpdateView для возможности редактирования записи
+from django.views.generic.edit import UpdateView
+
+# добавляем класс DeleteView для возможности удаления записи
+from django.views.generic.edit import DeleteView
 
 # импортируем модель города
 from .models import City
@@ -18,7 +24,7 @@ from .forms import CityForm
 from django.urls import reverse_lazy
 
 
-# функция отображения
+# функция отображения домашней страницы
 
 def home(request):
     # проверка данных, которые мы отправляем
@@ -70,3 +76,32 @@ class CityCreateView(CreateView):
 
     # функция возврата на домашнюю страницу(со списком городов) после успешного создания записи
     success_url = reverse_lazy('city:home')
+
+
+# отображение страницы изменения записи
+class CityUpdateView(UpdateView):
+    # привязываем модель к City
+    model = City
+
+    # указываем форму класса
+    form_class = CityForm
+
+    # задаём имя шаблона
+
+    template_name = 'cities/update.html'
+
+    # функция возврата на домашнюю страницу(со списком городов) после успешного создания записи
+    success_url = reverse_lazy('city:home')
+
+
+# удаление записи
+class CityDeleteView(DeleteView):
+    model = City
+    template_name = 'cities/delete.html'
+    success_url = reverse_lazy('city:home')
+
+    # если нет необходимости в подтверждении удаления, можно сделать так; без использования страницы подстверждения
+    # cities/delete.html; так же иногда используется подтверждающий скрипт написанный на JS
+
+   # def get(self, request, *args, **kwargs):
+       # return self.post(request, request, *args, **kwargs)

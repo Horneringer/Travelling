@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Удаление города {% endblock %}
+
+{% block content %}
+   <h1 class="display-4">Удалить город</h1>
+   <div class='row'>
+       <!--подстройка по размеру экрана; используем 3 колонки из 12-ти возможных-->
+       <div class="col-md-4">
+           <form method="post">{% csrf_token %}
+               <!--Подтверждение удаления записи-->
+                <p>Вы уверенеы, что хотите удалить "{{ object }}"?</p>
+                <input type="submit" value="Да, удалить">
+           </form>
+
+       </div>
+
+   </div>
+
+{% endblock %}
