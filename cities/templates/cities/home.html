@@ -44,17 +44,41 @@
            {% endfor %}
            </tbody>
            </table>
+
+           <!--класс пагинации от Django-->
+           <!--отступ по вертикали-->
+           <div class="pagination my-4">
+             <span class="step-links">
+                {% if objects_list.has_previous %}
+                    <a href="?page=1">&laquo;</a>
+                    <a href="?page={{ objects_list.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ objects_list.number }} of {{ objects_list.paginator.num_pages }}.
+                </span>
+
+                {% if objects_list.has_next %}
+                    <a href="?page={{ objects_list.next_page_number }}">next</a>
+                    <a href="?page={{ objects_list.paginator.num_pages }}"> &raquo;</a>
+                {% endif %}
+             </span>
+           </div>
        </div>
    </div>
 
    <!--кнопка добавления записи-->
-   <div class="col-md-6">
+   <div class="row">
+
+
+     <div class="col-md-6">
        <a href="{%url 'city:add'%}" style='color:white'>
                            <button type="button" class="btn btn-primary btn-sm">
                                Добавить новый город
                            </button>
        </a>
 
+     </div>
    </div>
 
 {% endblock %}

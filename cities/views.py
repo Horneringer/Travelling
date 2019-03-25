@@ -14,6 +14,9 @@ from django.views.generic.edit import UpdateView
 # добавляем класс DeleteView для возможности удаления записи
 from django.views.generic.edit import DeleteView
 
+# импортируем пагинатор для разбиения на несколько страниц
+from django.core.paginator import Paginator
+
 # импортируем модель города
 from .models import City
 
@@ -29,7 +32,8 @@ from django.urls import reverse_lazy
 def home(request):
     # проверка данных, которые мы отправляем
     # если форма не заполнена, получаем сообщение
-    if request.method == 'POST':
+
+    """if request.method == 'POST':
         form = CityForm(request.POST or None)
         # при попытке сохранить в форме уже существующие данные, print не сработает
         if form.is_valid():
@@ -39,12 +43,17 @@ def home(request):
 
     # отслеживаем куда ушёл запрос с формы, выводим только название города
     city = request.POST.get('name')
-    # print(city)
+    # print(city)"""
 
     # запрос к базе  на получение всех записей; формируем html-ответ данными cities
     cities = City.objects.all()
+    # создаём объект класса Paginator;
+    # в качестве параметров список всех записей и количество записей, отображаемых на одной странице
+    paginator = Paginator(cities, 5)
+    page = request.GET.get('page')
+    cities = paginator.get_page(page)
     # форму так же  указываем в контексте, добавляем в словарь
-    return render(request, 'cities/home.html', {'objects_list': cities, 'form': form})
+    return render(request, 'cities/home.html', {'objects_list': cities,})
 
 
 # отображение страницы деталей для отдельной записи
@@ -103,5 +112,5 @@ class CityDeleteView(DeleteView):
     # если нет необходимости в подтверждении удаления, можно сделать так; без использования страницы подстверждения
     # cities/delete.html; так же иногда используется подтверждающий скрипт написанный на JS
 
-   # def get(self, request, *args, **kwargs):
-       # return self.post(request, request, *args, **kwargs)
+# def get(self, request, *args, **kwargs):
+# return self.post(request, request, *args, **kwargs)
