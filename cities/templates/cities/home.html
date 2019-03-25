@@ -7,14 +7,57 @@
    <div class='row'>
        <!--подстройка по размеру экрана-->
        <div class="col-md-6">
+           <!--создание таблицы-->
+           <table class="table table-striped table-dark">
+           <tbody>
            <!--формируем список городов, то есть просто печатаем имена-->
            {% for object in objects_list %}
-               <p>{{object.name}}</p>
+           <!--tr - строка таблицы, td - ячейка таблицы-->
+               <tr>
+               <!--чтобы просматривать детали объекта нужно создать ссылку на него-->
+                   <td>
+                       <body>
+                       <a href="{%url 'city:detail' pk=object.pk%}" style='color:white'>
+                           {{object.name}}
+                       </a>
+                       </body>
+                   </td>
+
+                   <!--ссылка на редактирование записи, в виде кнопки-->
+                   <td>
+                       <a href="{%url 'city:update' pk=object.pk%}" style='color:white'>
+                           <button type="button" class="btn btn-light btn-sm">
+                           Редактировать
+                           </button>
+                       </a>
+                   </td>
+
+                   <!--ссылка на удаление записи, в виде кнопки-->
+                   <td>
+                       <a href="{%url 'city:delete' pk=object.pk%}" style='color:white'>
+                           <button type="button" class="btn btn-danger btn-sm">
+                           Удалить
+                           </button>
+                       </a>
+                   </td>
+               </tr>
            {% endfor %}
+           </tbody>
+           </table>
        </div>
+   </div>
+
+   <!--кнопка добавления записи-->
+   <div class="col-md-6">
+       <a href="{%url 'city:add'%}" style='color:white'>
+                           <button type="button" class="btn btn-primary btn-sm">
+                               Добавить новый город
+                           </button>
+       </a>
 
    </div>
 
+{% endblock %}
 
 <!--Создание формы для добавления города на странице-->
 <!--action передаёт нашу форму на какой-то адрес. Если action пуст, то обработка формы передаётся на ту  страницу, с которой вызывается -->
@@ -31,5 +74,4 @@
   <input type="submit" value="Сохранить">
 </form>-->
 
-<!--Более продвинутый вариант написания формы--> 
-{% endblock %}
+<!--Более продвинутый вариант написания формы-->
