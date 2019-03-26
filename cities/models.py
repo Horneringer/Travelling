@@ -1,3 +1,4 @@
+# создаём модель Город
 from django.db import models
 
 
