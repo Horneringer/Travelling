@@ -24,5 +24,9 @@ urlpatterns = [
     # прописываем путь для url, находящегося в cities с помощью функции include;
     # в качестве аргументов указываем директорию и пространство имён
     path('cities/', include(('cities.urls', 'city'))),
+
+    # прописываем путь для url, находящегося в trains с помощью функции include;
+    # в качестве аргументов указываем директорию и пространство имён
+    path('trains/', include(('trains.urls', 'train'))),
     path('', home_view, name='home')
 ]

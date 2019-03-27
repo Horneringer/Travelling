@@ -122,5 +122,5 @@ class CityDeleteView(DeleteView):
     # cities/delete.html; так же иногда используется подтверждающий скрипт написанный на JS
 
     '''def get(self, request, *args, **kwargs):
-        messages.success(request, 'Грод успешно удалён!')
+        messages.success(request, 'Город успешно удалён!')
         return self.post(request, request, *args, **kwargs)'''

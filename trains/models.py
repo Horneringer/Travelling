@@ -50,4 +50,4 @@ class Train(models.Model):
         if qs.exists():
             raise ValidationError('Измените время пути')
         # прочитать про super
-        return super(Train, self).clean(*args, **kwargs) 
+        return super(Train, self).clean(*args, **kwargs)

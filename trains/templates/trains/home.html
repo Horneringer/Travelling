@@ -1,0 +1,115 @@
+<!--Начальная страница для приложения(вкладки) Города, со списком добавленых на данный момент городов -->
+{% extends "base.html" %}
+{% block title %}Поезда{% endblock %}
+
+{% block content %}
+   <h1 class="display-4">Поезда</h1>
+   <div class='row'>
+       <!--подстройка по размеру экрана-->
+       <div class="col-md-8">
+           <!--создание таблицы-->
+           <table class="table table-striped table-dark">
+               <!--заголовки-->
+               <thead>
+               <tr>
+                   <th>Номер поезда</th>
+                   <th>Откуда</th>
+                   <th>Куда</th>
+                   <th>Время в пути</th>
+                   <!--пустые колонки над кнопками, &nbsp; - пробел-->
+                   <th>&nbsp;</th>
+                   <th>&nbsp;</th>
+               </tr>
+
+               </thead>
+           <tbody>
+           <!--формируем список городов, то есть просто печатаем имена-->
+           {% for object in objects_list %}
+           <!--tr - строка таблицы, td - ячейка таблицы-->
+               <tr>
+               <!--чтобы просматривать детали объекта нужно создать ссылку на него-->
+                   <td>
+                       <body>
+                       <a href="" style=''>
+                           {{object.name}}
+                       </a>
+                       </body>
+                   </td>
+
+                   <!--откуда-->
+                    <td>
+                           {{object.from_city}}
+                   </td>
+
+                   <!--куда-->
+
+                    <td>
+                           {{object.to_city}}
+                   </td>
+
+                   <!--время в пути-->
+
+                    <td>
+                           {{object.travel_time}}
+                   </td>
+
+                   <!--ссылка на редактирование записи, в виде кнопки-->
+                   <td>
+                       <a href="" style=''>
+                           <button type="button" class="btn btn-light btn-sm">
+                           Редактировать
+                           </button>
+                       </a>
+                   </td>
+
+                   <!--ссылка на удаление записи, в виде кнопки-->
+                   <td>
+                       <a href="" style=''>
+                           <button type="button" class="btn btn-danger btn-sm">
+                           Удалить
+                           </button>
+                       </a>
+                   </td>
+               </tr>
+           {% endfor %}
+           </tbody>
+           </table>
+
+           <!--класс пагинации от Django-->
+           <!--отступ по вертикали-->
+           <div class="pagination my-4">
+             <span class="step-links">
+                {% if objects_list.has_previous %}
+                    <a href="?page=1">&laquo;</a>
+                    <a href="?page={{ objects_list.previous_page_number }}">Предыдущая</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ objects_list.number }} of {{ objects_list.paginator.num_pages }}.
+                </span>
+
+                {% if objects_list.has_next %}
+                    <a href="?page={{ objects_list.next_page_number }}">Следующая</a>
+                    <a href="?page={{ objects_list.paginator.num_pages }}"> &raquo;</a>
+                {% endif %}
+             </span>
+           </div>
+       </div>
+   </div>
+
+   <!--кнопка добавления записи-->
+   <div class="row">
+
+
+     <div class="col-md-6">
+       <a href="" style=''>
+                           <button type="button" class="btn btn-primary btn-sm">
+                               Добавить новый город
+                           </button>
+       </a>
+
+     </div>
+   </div>
+
+{% endblock %}
+
