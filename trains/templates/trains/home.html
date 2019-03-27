@@ -55,7 +55,7 @@
 
                    <!--ссылка на редактирование записи, в виде кнопки-->
                    <td>
-                       <a href="" style=''>
+                       <a href="{%url 'train:update' pk=object.pk%}" style='color:white'>
                            <button type="button" class="btn btn-light btn-sm">
                            Редактировать
                            </button>
@@ -64,7 +64,7 @@
 
                    <!--ссылка на удаление записи, в виде кнопки-->
                    <td>
-                       <a href="" style=''>
+                       <a href="{%url 'city:delete' pk=object.pk%}" style='color:white'>
                            <button type="button" class="btn btn-danger btn-sm">
                            Удалить
                            </button>
@@ -102,9 +102,9 @@
 
 
      <div class="col-md-6">
-       <a href="" style=''>
+       <a href="{%url 'train:add'%}" style='color:white'>
                            <button type="button" class="btn btn-primary btn-sm">
-                               Добавить новый город
+                               Добавить новый поезд
                            </button>
        </a>
 
