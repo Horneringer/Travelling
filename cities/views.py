@@ -113,7 +113,7 @@ class CityUpdateView(SuccessMessageMixin, UpdateView):
 
 
 # удаление записи; с удаление миксины не работают с шаблонами подтверждения? но работают несколько иначе с функцией ниже
-class CityDeleteView(DeleteView):
+class CityDeleteView(SuccessMessageMixin, DeleteView):
     model = City
     template_name = 'cities/delete.html'
     success_url = reverse_lazy('city:home')
