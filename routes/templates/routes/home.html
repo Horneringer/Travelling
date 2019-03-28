@@ -1,0 +1,23 @@
+<!--Начальная страница для приложения(вкладки) Города, со списком добавленых на данный момент городов -->
+{% extends "base.html" %}
+{% block title %}Поиск маршрута{% endblock %}
+
+{% block content %}
+   <h1 class="display-4">Поиск маршрута</h1>
+   <div class='row'>
+       <!--подстройка по размеру экрана-->
+       <div class="col-md-8">
+           <form action="" method="post"> {% csrf_token %}
+ <!--Данный метод реализует форму как строки(прочитать об API-формах) Формирует форму в качестве парагрфа-->
+              {{form.as_p}}
+              <input type="submit" value="Найти">
+           </form>
+
+       </div>
+   </div>
+
+
+
+
+{% endblock %}
+

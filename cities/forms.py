@@ -16,7 +16,7 @@ class CityForm(forms.ModelForm):
     # добавляем виджет с необходимыми атрибутами и плейсхолдер -- надпись-подсказка внутри формы; таким образом мы
     # передадим форме оформление
     name = forms.CharField(label='Город', widget=forms.TextInput(
-        attrs={'class': 'form-control-sm', 'placeholder': 'Введите название города'}))
+        attrs={'class': 'form-control', 'placeholder': 'Введите название города'}))
 
     class Meta(object):
         # задаём модель

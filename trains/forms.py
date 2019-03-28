@@ -9,19 +9,19 @@ from cities.models import City
 # форма для поезда
 class TrainForm(forms.ModelForm):
     name = forms.CharField(label='Поезд', widget=forms.TextInput(
-        attrs={'class': 'form-control-sm', 'placeholder': 'Введите номер поезда'}))
+        attrs={'class': 'form-control', 'placeholder': 'Введите номер поезда'}))
 
     # переопределяем поля; данный тип поля позволяет сделать выбор из списка вариантов
     # список получаем с помощью querset
     # виджет для выбора - select
     from_city = forms.ModelChoiceField(label='Откуда', queryset=City.objects.all(),
-                                       widget=forms.Select(attrs={'class': 'form-control-sm', 'placeholder': 'Откуда'}))
+                                       widget=forms.Select(attrs={'class': 'form-control', 'placeholder': 'Откуда'}))
 
     to_city = forms.ModelChoiceField(label='Куда', queryset=City.objects.all(),
-                                     widget=forms.Select(attrs={'class': 'form-control-sm', 'placeholder': 'Куда'}))
+                                     widget=forms.Select(attrs={'class': 'form-control', 'placeholder': 'Куда'}))
 
     travel_time = forms.IntegerField(label='Время в пути', widget=forms.NumberInput(
-        attrs={'class': 'form-control-sm', 'placeholder': 'Время в пути'}))
+        attrs={'class': 'form-control', 'placeholder': 'Время в пути'}))
 
     class Meta(object):
         model = Train

@@ -17,13 +17,11 @@ class Route(models.Model):
     across_cities = models.ManyToManyField(Train, blank=True, verbose_name='Через города')
     travev_times = models.IntegerField(verbose_name='Время в пути')
 
+    # возврат названия маршрута
+    def __str__(self):
+        return self.name
 
-# возврат названия маршрута
-def __str__(self):
-    return self.name
-
-
-class Meta:
-    verbose_name = 'Маршрут'
-    verbose_name_plural = 'Маршруты'
-    ordering = ['name']
+    class Meta:
+        verbose_name = 'Маршрут'
+        verbose_name_plural = 'Маршруты'
+        ordering = ['name']

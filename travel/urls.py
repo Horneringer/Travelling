@@ -17,7 +17,7 @@ Including another URLconf
 # общий url для всего проекта
 from django.contrib import admin
 from django.urls import path, include
-from .views import home_view
+from routes.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +28,6 @@ urlpatterns = [
     # прописываем путь для url, находящегося в trains с помощью функции include;
     # в качестве аргументов указываем директорию и пространство имён
     path('trains/', include(('trains.urls', 'train'))),
-    path('', home_view, name='home')
+    # форма поиска маршрутов будет отображаться на главной странице
+    path('', home, name='home')
 ]
