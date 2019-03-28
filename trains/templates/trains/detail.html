@@ -1,13 +1,77 @@
 {% extends "base.html" %}
-{% block title %}Город{% endblock %}
+{% block title %}Поезд{% endblock %}
 
 {% block content %}
-   <h1 class="display-4">Город</h1>
+   <h1 class="display-4">Поезд</h1>
    <div class='row'>
        <!--подстройка по размеру экрана-->
        <div class="col-md-6">
-           <!--формируем список городов, то есть просто печатаем имена-->
-               <p>Название города: {{object.name}}</p>
+           <!--таблица-->
+               <table class="table table-striped table-dark">
+               <!--заголовки-->
+               <thead>
+               <tr>
+                   <th>Номер поезда</th>
+                   <th>Откуда</th>
+                   <th>Куда</th>
+                   <th>Время в пути</th>
+                   <!--пустые колонки над кнопками, &nbsp; - пробел-->
+                   <th>&nbsp;</th>
+                   <th>&nbsp;</th>
+               </tr>
+
+               </thead>
+           <tbody>
+
+
+           <!--tr - строка таблицы, td - ячейка таблицы-->
+               <tr>
+               <!--чтобы просматривать детали объекта нужно создать ссылку на него-->
+                   <td>
+                       <body>
+                       <a href="" style='color:white'>
+                           {{object.name}}
+                       </a>
+                       </body>
+                   </td>
+
+                   <!--откуда-->
+                    <td>
+                           {{object.from_city}}
+                   </td>
+
+                   <!--куда-->
+
+                    <td>
+                           {{object.to_city}}
+                   </td>
+
+                   <!--время в пути-->
+
+                    <td>
+                           {{object.travel_time}}
+                   </td>
+
+                   <!--ссылка на редактирование записи, в виде кнопки-->
+                   <td>
+                       <a href="{%url 'train:update' pk=object.pk%}" style='color:white'>
+                           <button type="button" class="btn btn-light btn-sm">
+                           Редактировать
+                           </button>
+                       </a>
+                   </td>
+
+                   <!--ссылка на удаление записи, в виде кнопки-->
+                   <td>
+                       <a href="{%url 'train:delete' pk=object.pk%}" style='color:white'>
+                           <button type="button" class="btn btn-danger btn-sm">
+                           Удалить
+                           </button>
+                       </a>
+                   </td>
+               </tr>
+           </tbody>
+           </table>
 
        </div>
 
@@ -19,8 +83,8 @@
     <div class='row'>
        <!--подстройка по размеру экрана-->
        <div class="col-md-6">
-           <!--создайм переход по ссылке на home в пространстве имен city-->
-               <a href='{%url "city:home"%}'>
+           <!--создайм переход по ссылке на home в пространстве имен train-->
+               <a href='{%url "train:home"%}'>
            <!--добавляем кнопку-->
                <button type='button' class='btn btn-light'>
            <!--Название кнопки-->

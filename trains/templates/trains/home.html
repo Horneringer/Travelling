@@ -30,7 +30,7 @@
                <!--чтобы просматривать детали объекта нужно создать ссылку на него-->
                    <td>
                        <body>
-                       <a href="" style=''>
+                       <a href="{%url 'train:detail' pk=object.pk%}" style='color:white'>
                            {{object.name}}
                        </a>
                        </body>
@@ -64,7 +64,7 @@
 
                    <!--ссылка на удаление записи, в виде кнопки-->
                    <td>
-                       <a href="{%url 'city:delete' pk=object.pk%}" style='color:white'>
+                       <a href="{%url 'train:delete' pk=object.pk%}" style='color:white'>
                            <button type="button" class="btn btn-danger btn-sm">
                            Удалить
                            </button>
