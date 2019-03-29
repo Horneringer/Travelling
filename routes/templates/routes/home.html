@@ -7,7 +7,8 @@
    <div class='row'>
        <!--подстройка по размеру экрана-->
        <div class="col-md-8">
-           <form action="" method="post"> {% csrf_token %}
+           <!--по нажатию на кнопку "найти" происходит переходж на страницу поиска-->
+           <form action="{%url 'find_routes'%}" method="post"> {% csrf_token %}
  <!--Данный метод реализует форму как строки(прочитать об API-формах) Формирует форму в качестве парагрфа-->
               {{form.as_p}}
               <input type="submit" value="Найти">

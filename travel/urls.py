@@ -17,17 +17,24 @@ Including another URLconf
 # общий url для всего проекта
 from django.contrib import admin
 from django.urls import path, include
-from routes.views import home
+from routes.views import home, find_routes
 
 urlpatterns = [
+    # адрес админки
     path('admin/', admin.site.urls),
+
+    # адрес приложения Города
     # прописываем путь для url, находящегося в cities с помощью функции include;
     # в качестве аргументов указываем директорию и пространство имён
     path('cities/', include(('cities.urls', 'city'))),
 
-    # прописываем путь для url, находящегося в trains с помощью функции include;
-    # в качестве аргументов указываем директорию и пространство имён
+    # адрес приложения Поезда
     path('trains/', include(('trains.urls', 'train'))),
+
+    # адрес страницы с найденными путями
+    path('find/', find_routes, name='find_routes'),
+
+    # адрес приложения Маршруты
     # форма поиска маршрутов будет отображаться на главной странице
     path('', home, name='home')
 ]
