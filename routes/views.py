@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.contrib import messages
 
@@ -230,3 +230,63 @@ def find_routes(request):
         # и снова отображаем страницу с формой
         form = RouteForm()
         return render(request, 'routes/home.html', {'form': form})
+
+
+# функция для сохранения маршрута в БД
+
+
+def add_route(request):
+    # вариант с методом POST, когда происходит непосредственно сохранение данных с название маршрута
+    if request.method == 'POST':
+        pass
+    # вариант c данными, которые мы получаем из формы (GET)
+    else:
+        data = request.GET
+        # если пришли какие-либо данные через request
+        if data:
+            from_city = data['from_city']
+            to_city = data['to_city']
+            travel_times = data['travel_times']
+
+            # данное поле представлено id городов, можно разбить строку по пробелам
+            across_cities = data['across_cities'].split(' ')
+
+            # с помощью генератора проходим по списку и все элементы которые не являются пробелами передаём в наш список и переводим к численный тип
+            # метод isalnum вернет True, если в строке хотя бы один символ и все символы строки являются цифрами и/или буквами, иначе False
+            trains = [int(x) for x in across_cities if x.isalnum()]
+
+            # получение списка поездов по id; в фильтре указываем id, которые нас интересуют
+            qs = Train.objects.filter(id__in=trains)
+
+            # преобразуем список trains в строку, используя join
+            trains_list = ''.join(str(i) for i in trains)
+
+            # создаём форму для полученных данных
+            # в initial передаём словарь со значениями - все эти данные мы сможем получить на странице сохранения при подключении формы,
+            # однако видно будет только поле с именем маршрута
+            form = RouteModelForm(initial={'from_city': from_city, 'to_city': to_city, 'travel_times': travel_times,
+                                           'across_cities': trains_list})
+
+            # словарь для описаний
+            route_desc = []
+
+            # с помощью цикла делаем описание к каждому сохраненному маршруту
+            for tr in qs:
+                dsc = 'Поезд №{} следующий из г. {} в г. {} Время в пути {}.'.format(tr.name, tr.from_city, tr.to_city,
+                                                                                     tr.travel_times)
+                route_desc.append(dsc)
+
+            # контекст для рендеринга
+            context = {'form': form, 'descr': route_desc, 'from_city': from_city, 'to_city': to_city,
+                       'travel_times': travel_times}
+
+            return render(request, 'routes/create.html', context)
+
+
+
+        # иначе отображается сообщение о том, что нечего сохранять
+        else:
+            messages.error(request, 'Невозможно сохранить несуществующий маршрут')
+            # Возвращает перенаправление(HttpResponseRedirect) на URL указанный в аргументах
+            # в данном случае начальная страница с формой поиска
+            return redirect('/')

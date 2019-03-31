@@ -1,5 +1,6 @@
 from django import forms
 from cities.models import City
+from .models import Route
 
 
 # форма для маршрутов; будет привязана к модели Города
@@ -16,8 +17,23 @@ class RouteForm(forms.Form):
     # SelectMultiple позволяет выбирать несколько варантов для заполнения одного поля
 
     across_cities = forms.ModelMultipleChoiceField(label='Через города', queryset=City.objects.all(),
-                                                   widget=forms.SelectMultiple(attrs={'class': 'form-control js-example-basic-multiple', }),
+                                                   widget=forms.SelectMultiple(
+                                                       attrs={'class': 'form-control js-example-basic-multiple', }),
                                                    required=False)
 
     traveling_time = forms.IntegerField(label='Время в пути', widget=forms.NumberInput(
         attrs={'class': 'form-control', 'placeholder': 'Время в пути'}))
+
+
+# класс формы для сохранения маршрута
+class RouteModelForm(forms.Form):
+    # все поля кроме имени будут скрытыми
+    name = forms.CharField(label='Название маршрута', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    from_city = forms.CharField(widget=forms.HiddenInput())
+    to_city = forms.CharField(widget=forms.HiddenInput())
+    across_cities = forms.CharField(widget=forms.HiddenInput())
+    travel_times = forms.IntegerField(widget=forms.HiddenInput())
+
+    class Meta:
+        model = Route
+        fields = ('name', 'from_city', 'to_city', 'across_cities', 'travel_times')
