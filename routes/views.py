@@ -175,7 +175,7 @@ def find_routes(request):
 
             routes = []
 
-            cities = {'from_city': from_city.name, 'to_city': from_city.name}
+            cities = {'from_city': from_city.name, 'to_city': to_city.name}
 
             # модифицируем полученные данные в списке trains, чтобы улучшить отображение
             for tr in trains:
