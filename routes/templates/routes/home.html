@@ -5,6 +5,47 @@
 {% block content %}
    <h1 class="display-4">Поиск маршрута</h1>
    <div class='row'>
+
+       <!--если маршруты найдены, то отображаем их-->
+
+       {%if routes%}
+         <div class="col-md-8">
+         <h3> Маршруты из {{cities.from_city}} в {{cities.to_city}} </h3>
+        <!--horizontal row-->
+         <hr>
+         {%for route in routes%}
+          <!--отметим самый короткий маршрут-->
+           {%if forloop.first %}
+             <h5>Самый короткий маршрут</h5>
+           {%endif%}
+
+           <table class="table table-striped table-dark">
+               <!--заголовки-->
+               <thead>
+               <tr>
+                   <th>Список поездов</th>
+               </tr>
+
+               </thead>
+           <tbody>
+            <!--проходим по всем поездам внутри данного маршрута-->
+           {%for train in route.route%}
+              <tr>
+                  <td>
+                      Поезд № {{train.name}}, следующий из {{train.from_city}}, в {{train.to_city}}.
+                      Время в пути {{train.travel_time}}</td>
+              </tr>
+           {%endfor%}
+           </tbody>
+           </table>
+
+           <p>Общее время в пути {{route.total_time}}</p>
+
+         {%endfor%}
+         </div>
+       {%endif%}
+
+
        <!--подстройка по размеру экрана-->
        <div class="col-md-8">
            <!--по нажатию на кнопку "найти" происходит переход на страницу поиска, но уже с наденными путями-->

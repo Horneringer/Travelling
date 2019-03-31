@@ -169,9 +169,43 @@ def find_routes(request):
             # если итоговый список поездов пуст
             if not trains:
                 # выводим предупреждение
-                messages.warning(request, 'Время в пути больше выбранного!')
+                messages.error(request, 'Время в пути больше выбранного!')
                 #  и происходит возврат на страницу с формой
                 return render(request, 'routes/home.html', {'form': form})
+
+            routes = []
+
+            cities = {'from_city': from_city.name, 'to_city': from_city.name}
+
+            # модифицируем полученные данные в списке trains, чтобы улучшить отображение
+            for tr in trains:
+                # разворачиваем данные по каждому поезду в запись с несколькими полями(пересадки, общее время, откуда, куда)
+                routes.append({'route': tr['trains'],
+                               'total_time': tr['total_time'],
+                               'from_city': from_city.name,
+                               'to_city': to_city.name})
+
+            # переменная, содержащая отсортированный список
+            sorted_routes = []
+            # если получили только один поезд в маршруте
+            if routes == 1:
+                sorted_routes = routes
+
+            # если больше одного поезда в маршруте, то сортируем
+            else:
+                # делаем список из множества(если есть два маршрута с одинаковым временем, нет необходимости добавлять их все, а только один)
+                # так мы получим список уникальных значений времени
+                times = list(set(x['total_time'] for x in routes))
+                # сортируем получившийся список по возрастанию времени
+                times = sorted(times)
+
+                # проходим по списку времени и списку маршрутов
+                for time in times:
+                    for route in routes:
+                        # если время, которое мы получили в цикле равно времени внутри маршрута
+                        if time == route['total_time']:
+                            # данный маршрут добавляем в список sorted_routes, получим список отсортированных маршрутов
+                            sorted_routes.append(route)
 
             context = {}
 
@@ -180,7 +214,9 @@ def find_routes(request):
             context['form'] = form
 
             # записываем список путей
-            context['ways'] = trains
+            context['routes'] = sorted_routes
+
+            context['cities'] = cities
 
             return render(request, 'routes/home.html', context)
 
