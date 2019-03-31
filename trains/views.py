@@ -14,7 +14,7 @@ from django.contrib import messages
 
 def home(request):
     trains = Train.objects.all()
-    paginator = Paginator(trains, 5)
+    paginator = Paginator(trains, 10)
     page = request.GET.get('page')
     trains = paginator.get_page(page)
     # форму так же  указываем в контексте, добавляем в словарь

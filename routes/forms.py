@@ -20,4 +20,4 @@ class RouteForm(forms.Form):
                                                    required=False)
 
     traveling_time = forms.IntegerField(label='Время в пути', widget=forms.NumberInput(
-        attrs={'class': 'form-control-sm', 'placeholder': 'Время в пути'}))
+        attrs={'class': 'form-control', 'placeholder': 'Время в пути'}))

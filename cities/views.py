@@ -54,7 +54,7 @@ def home(request):
     cities = City.objects.all()
     # создаём объект класса Paginator;
     # в качестве параметров список всех записей и количество записей, отображаемых на одной странице
-    paginator = Paginator(cities, 5)
+    paginator = Paginator(cities, 10)
     page = request.GET.get('page')
     cities = paginator.get_page(page)
     # форму так же  указываем в контексте, добавляем в словарь
