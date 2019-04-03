@@ -237,8 +237,36 @@ def find_routes(request):
 
 def add_route(request):
     # вариант с методом POST, когда происходит непосредственно сохранение данных с название маршрута
+    # то есть, что произойдёт при нажатии на кнопку "сохранить" на странице /add_route
     if request.method == 'POST':
-        pass
+        form = RouteModelForm(request.POST or None)
+        # проверяем валидна ли форма
+        if form.is_valid():
+            # получаем все данные для того чтобы сохранить модель
+            data = form.cleaned_data
+            name = data['name']
+            from_city = data['from_city']
+            to_city = data['to_city']
+            travel_times = data['travel_times']
+            across_cities = data['across_cities'].split(' ')
+            trains = [int(x) for x in across_cities if x.isalnum()]
+            qs = Train.objects.filter(id__in=trains)
+            # поля , которые можно сохранить сразу;
+            # только после их сохраниения можно будет сохранить поезда(так как там отношение "многие ко многим")
+            route = Route(name=name, from_city=from_city, to_city=to_city, travev_times=travel_times)
+
+            # сохраняем запись route в БД
+            route.save()
+
+            # добавляем в цикле последовательно по одному id промежуточных поездов
+            for tr in qs:
+                route.across_cities.add(tr.id)
+                # сообщение об успешном сохранении маршрута
+            messages.success(request, 'Маршрут успешно сохранён')
+            # переход на главную страницу
+            return redirect('/')
+
+
     # вариант c данными, которые мы получаем из формы (GET)
     else:
         data = request.GET
@@ -259,7 +287,7 @@ def add_route(request):
             qs = Train.objects.filter(id__in=trains)
 
             # преобразуем список trains в строку, используя join
-            trains_list = ''.join(str(i) for i in trains)
+            trains_list = ' '.join(str(i) for i in trains)
 
             # создаём форму для полученных данных
             # в initial передаём словарь со значениями - все эти данные мы сможем получить на странице сохранения при подключении формы,
@@ -273,7 +301,7 @@ def add_route(request):
             # с помощью цикла делаем описание к каждому сохраненному маршруту
             for tr in qs:
                 dsc = 'Поезд №{} следующий из г. {} в г. {} Время в пути {}.'.format(tr.name, tr.from_city, tr.to_city,
-                                                                                     tr.travel_times)
+                                                                                     tr.travel_time)
                 route_desc.append(dsc)
 
             # контекст для рендеринга
