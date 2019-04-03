@@ -1,0 +1,21 @@
+<!--Страница создания новой записи-->
+{% extends "base.html" %}
+{% block title %}Страница входа {% endblock %}
+
+{% block content %}
+   <h1 class="display-4">Войти в систему</h1>
+   <!--mx-auto для горизонтального выравнивания блока содержимого-->
+   <div class='row mx-auto'>
+       <!--подстройка по размеру экрана; используем 3 колонки из 12-ти возможных-->
+       <div class="col-md-6">
+           <form action="" method="post"> {% csrf_token %}
+ <!--Данный метод реализует форму как строки(прочитать об API-формах) Формирует форму в качестве парагрфа-->
+              {{form.as_p}}
+              <input type="submit" value="Войти">
+           </form>
+       </div>
+
+   </div>
+
+
+{% endblock %}

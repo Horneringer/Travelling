@@ -20,13 +20,15 @@ from django.urls import path, include
 from routes.views import home, find_routes, add_route, RouteListView, RouteDetailView, RouteDeleteView
 
 # библиотека для авторизации
-from .views import login_view
+from .views import login_view, logout_view
 
 urlpatterns = [
     # адрес админки
     path('admin/', admin.site.urls),
     # адрес для входа
-    path('login/', login_view(), name='login'),
+    path('login/', login_view, name='login'),
+    # адрес выхода
+    path('logout/', logout_view, name='logout'),
 
     # адрес приложения Города
     # прописываем путь для url, находящегося в cities с помощью функции include;
