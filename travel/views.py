@@ -9,3 +9,7 @@ from django.shortcuts import render
 def home_view(request):
     context = {'name': 'Щегол'}
     return render(request, 'home.html', context)
+
+
+def login_view(request):
+    pass

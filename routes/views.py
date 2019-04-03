@@ -16,6 +16,9 @@ from django.urls import reverse_lazy
 # импорт модели Поезд
 from trains.models import Train
 
+# импортируем декоратор
+from django.contrib.auth.decorators import login_required
+
 # импортируем все формы
 from .forms import *
 
@@ -68,6 +71,10 @@ def get_graph():
     return graph
 
 
+# оборачиваем домашнюю страницу в декоратор
+# если пользователь не зашёл в уч запись, то выдаёт ошибку 404, указывает на необходимость авторизации
+# в параметрах указан адрес, где будет форма входа
+@login_required(login_url='/login/')
 # функция отображения домашней страницы маршрутов
 def home(request):
     form = RouteForm()

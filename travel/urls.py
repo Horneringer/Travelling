@@ -19,9 +19,14 @@ from django.contrib import admin
 from django.urls import path, include
 from routes.views import home, find_routes, add_route, RouteListView, RouteDetailView, RouteDeleteView
 
+# библиотека для авторизации
+from .views import login_view
+
 urlpatterns = [
     # адрес админки
     path('admin/', admin.site.urls),
+    # адрес для входа
+    path('login/', login_view(), name='login'),
 
     # адрес приложения Города
     # прописываем путь для url, находящегося в cities с помощью функции include;
