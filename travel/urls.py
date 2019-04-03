@@ -17,7 +17,7 @@ Including another URLconf
 # общий url для всего проекта
 from django.contrib import admin
 from django.urls import path, include
-from routes.views import home, find_routes, add_route
+from routes.views import home, find_routes, add_route, RouteListView, RouteDetailView, RouteDeleteView
 
 urlpatterns = [
     # адрес админки
@@ -34,8 +34,16 @@ urlpatterns = [
     # адрес страницы с найденными маршрутами
     path('find/', find_routes, name='find_routes'),
 
-    # адресс с сохраненными маршрутами
+    # адрес с сохраненными маршрутами
     path('add_route/', add_route, name='add_route'),
+
+    # адрес со списком маршрутов
+    path('list/', RouteListView.as_view(), name='list'),
+
+    # адрес с детализацией маршрутов
+    path('detail/<int:pk>/', RouteDetailView.as_view(), name='detail'),
+
+    path('delete/<int:pk>/', RouteDeleteView.as_view(), name='delete'),
 
     # адрес приложения Маршруты
     # форма поиска маршрутов будет отображаться на главной странице

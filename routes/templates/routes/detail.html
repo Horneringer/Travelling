@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Маршруты{% endblock %}
+
+{% block content %}
+   <h1 class="display-4">Маршруты</h1>
+   <div class='row'>
+       <!--подстройка по размеру экрана-->
+       <div class="col-md-8">
+           <!--создание таблицы-->
+           <table class="table table-striped table-dark">
+               <!--заголовки-->
+               <thead>
+               <tr>
+                   <th>Название маршрута</th>
+                   <th>Откуда</th>
+                   <th>Куда</th>
+                   <th>Время в пути</th>
+                   <!--пустые колонки над кнопками, &nbsp; - пробел-->
+                   <th>&nbsp;</th>
+                   <th>&nbsp;</th>
+               </tr>
+
+               </thead>
+           <tbody>
+
+               <tr>
+               <!--чтобы просматривать детали объекта нужно создать ссылку на него-->
+                   <td>
+                           {{object.name}}
+
+                   </td>
+
+                   <!--откуда-->
+                    <td>
+                           {{object.from_city}}
+                   </td>
+
+                   <!--куда-->
+
+                    <td>
+                           {{object.to_city}}
+                   </td>
+
+                   <!--время в пути-->
+
+                    <td>
+                           {{object.travev_times}}
+                   </td>
+
+                   <!--ссылка на редактирование записи, в виде кнопки-->
+                   <td>
+<!--                       <a href="{%url 'train:update' pk=object.pk%}" style='color:white'>-->
+<!--                           <button type="button" class="btn btn-light btn-sm">-->
+<!--                           Редактировать-->
+<!--                           </button>-->
+<!--                       </a>-->
+                   </td>
+
+                   <!--ссылка на удаление записи, в виде кнопки-->
+                   <td>
+<!--                       <a href="{%url 'train:delete' pk=object.pk%}" style='color:white'>-->
+<!--                           <button type="button" class="btn btn-danger btn-sm">-->
+<!--                           Удалить-->
+<!--                           </button>-->
+<!--                       </a>-->
+                   </td>
+               </tr>
+
+           </tbody>
+           </table>
+
+       </div>
+   </div>
+{%endblock%}

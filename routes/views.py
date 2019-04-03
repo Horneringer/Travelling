@@ -2,6 +2,17 @@ from django.shortcuts import render, redirect
 
 from django.contrib import messages
 
+from django.views.generic.detail import DetailView
+
+from django.views.generic.edit import DeleteView
+
+# импортируем класс ListView для детального отображения списка поездов
+from django.views.generic.list import ListView
+
+from django.contrib.messages.views import SuccessMessageMixin
+
+from django.urls import reverse_lazy
+
 # импорт модели Поезд
 from trains.models import Train
 
@@ -318,3 +329,30 @@ def add_route(request):
             # Возвращает перенаправление(HttpResponseRedirect) на URL указанный в аргументах
             # в данном случае начальная страница с формой поиска
             return redirect('/')
+
+
+class RouteDetailView(DetailView):
+    queryset = Route.objects.all()
+    context_object_name = 'object'
+    template_name = 'routes/detail.html'
+
+
+# класс отображения списка маршрутов
+class RouteListView(ListView):
+    queryset = Route.objects.all()
+    # контекст идёт по умолчания в такой форме - можно не прописывать
+    context_object_name = 'objects_list'
+    template_name = 'routes/list.html'
+
+
+class RouteDeleteView(SuccessMessageMixin, DeleteView):
+    model = Route
+    template_name = 'routes/delete.html'
+    success_url = reverse_lazy('home')
+
+    # если нет необходимости в подтверждении удаления, можно сделать так; без использования страницы подтверждения
+    # cities/delete.html; так же иногда используется подтверждающий скрипт написанный на JS
+
+    # def get(self, request, *args, **kwargs):
+    #     messages.success(request, 'Маршрут успешно удалён!')
+    #     return self.post(request, request, *args, **kwargs)
