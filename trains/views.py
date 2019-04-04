@@ -7,6 +7,7 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.core.paginator import Paginator
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import TrainForm
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -22,7 +23,6 @@ def home(request):
 
 
 class TrainDetailView(DetailView):
-
     queryset = Train.objects.all()
 
     # задаём имя для контекста (c каким именем мы будем отпрвлять данные для рендеринга); по умолчания object
@@ -34,7 +34,7 @@ class TrainDetailView(DetailView):
     template_name = 'trains/detail.html'
 
 
-class TrainCreateView(SuccessMessageMixin, CreateView):
+class TrainCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     # привязываем модель к Train
     model = Train
 
@@ -49,9 +49,10 @@ class TrainCreateView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('train:home')
     # сообщение об успешном завершении операции
     success_message = 'Поезд успешно добавлен!'
+    login_url = '/login/'
 
 
-class TrainUpdateView(SuccessMessageMixin, UpdateView):
+class TrainUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Train
 
     form_class = TrainForm
@@ -60,12 +61,14 @@ class TrainUpdateView(SuccessMessageMixin, UpdateView):
 
     success_url = reverse_lazy('train:home')
     success_message = 'Внесенные изменения сохранены!'
+    login_url = '/login/'
 
 
-class TrainDeleteView(DeleteView):
+class TrainDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Train
     template_name = 'trains/delete.html'
     success_url = reverse_lazy('train:home')
+    login_url = '/login/'
 
     # если нет необходимости в подтверждении удаления, можно сделать так; без использования страницы подстверждения
     # cities/delete.html; так же иногда используется подтверждающий скрипт написанный на JS

@@ -28,6 +28,7 @@ from django.urls import reverse_lazy
 
 # добавляем класс для отображения сообщений(миксин)
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib import messages
 
@@ -78,7 +79,7 @@ class CityDetailView(DetailView):
 
 # отображение страницы создания новой записи;
 # созданный класс наследуется от миксина, который идёт обязательно ПЕРВЫМ параметром
-class CityCreateView(SuccessMessageMixin, CreateView):
+class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     # привязываем модель к City
     model = City
 
@@ -93,10 +94,11 @@ class CityCreateView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('city:home')
     # сообщение об успешном завершении операции
     success_message = 'Город успешно добавлен!'
+    login_url = '/login/'
 
 
 # отображение страницы изменения записи
-class CityUpdateView(SuccessMessageMixin, UpdateView):
+class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     # привязываем модель к City
     model = City
 
@@ -110,13 +112,15 @@ class CityUpdateView(SuccessMessageMixin, UpdateView):
     # функция возврата на домашнюю страницу(со списком городов) после успешного создания записи
     success_url = reverse_lazy('city:home')
     success_message = 'Внесенные изменения сохранены!'
+    login_url = '/login/'
 
 
 # удаление записи; с удаление миксины не работают с шаблонами подтверждения? но работают несколько иначе с функцией ниже
-class CityDeleteView(SuccessMessageMixin, DeleteView):
+class CityDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = City
     template_name = 'cities/delete.html'
     success_url = reverse_lazy('city:home')
+    login_url = '/login/'
 
     # если нет необходимости в подтверждении удаления, можно сделать так; без использования страницы подстверждения
     # cities/delete.html; так же иногда используется подтверждающий скрипт написанный на JS

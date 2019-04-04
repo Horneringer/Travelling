@@ -11,6 +11,8 @@ from django.views.generic.list import ListView
 
 from django.contrib.messages.views import SuccessMessageMixin
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.urls import reverse_lazy
 
 # импорт модели Поезд
@@ -352,10 +354,13 @@ class RouteListView(ListView):
     template_name = 'routes/list.html'
 
 
-class RouteDeleteView(SuccessMessageMixin, DeleteView):
+class RouteDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Route
     template_name = 'routes/delete.html'
     success_url = reverse_lazy('home')
+
+    # адрес входа
+    login_url = '/login/'
 
     # если нет необходимости в подтверждении удаления, можно сделать так; без использования страницы подтверждения
     # cities/delete.html; так же иногда используется подтверждающий скрипт написанный на JS
