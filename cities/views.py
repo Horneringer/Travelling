@@ -1,4 +1,4 @@
-# Dyenhb папки cities создаём папку templates/cities, в которой будет храниться файл home.html
+# Внутри папки cities создаём папку templates/cities, в которой будет храниться файл home.html
 # c таким же содержимым, что и одноименный
 from django.shortcuts import render
 
@@ -51,7 +51,7 @@ def home(request):
     city = request.POST.get('name')
     # print(city)"""
 
-    # запрос к базе  на получение всех записей; формируем html-ответ данными cities
+    # запрос к базе  на получение всех записей; формируем html-ответ с данными cities
     cities = City.objects.all()
     # создаём объект класса Paginator;
     # в качестве параметров список всех записей и количество записей, отображаемых на одной странице
