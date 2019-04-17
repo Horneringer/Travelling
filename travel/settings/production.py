@@ -12,10 +12,13 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+# конструкция позволяет определить переменные из переменных окружений, которые позже определяются на Heroku
+# вытягиваем из окружения и передаём в переменную для настройки БД
 DB_NAME = os.environ.get('DB_NAME')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_HOST = os.environ.get('DB_HOST')
 DB_USER = os.environ.get('DB_USER')
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 # поднимаем расположение BASE_DIR на один уровень вверх(так как раньше файл settings был на уровне travel,
@@ -28,6 +31,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'iv10)rxux2l*buikioy2^pzyrtchgt0je^_4vhk%r-r#4)l+y0'
+
+# изначально в версии для продакшна не будет ключа(None);
+# для развёртки проекта необходимо указать ключ единожды, а птом он будет прописан в переменных окружениях Heroku
 # SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -98,7 +104,10 @@ DATABASES = {
     }
 }
 
+# на сайте https://pypi.org/project/python-dotenv/0.1.0/ есть библиотека,
+# с помощью которой можно легко скрывать необходимые данные от посторонних при развертке проета
 import dj_database_url
+
 db = dj_database_url.config()
 DATABASES['default'].update(db)
 
