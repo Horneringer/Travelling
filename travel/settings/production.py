@@ -30,16 +30,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'iv10)rxux2l*buikioy2^pzyrtchgt0je^_4vhk%r-r#4)l+y0'
+# SECRET_KEY = 'iv10)rxux2l*buikioy2^pzyrtchgt0je^_4vhk%r-r#4)l+y0'
 
 # изначально в версии для продакшна не будет ключа(None);
 # для развёртки проекта необходимо указать ключ единожды, а птом он будет прописан в переменных окружениях Heroku
-# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['travelling-django.herokuapp.com']
 
 # Application definition
 
