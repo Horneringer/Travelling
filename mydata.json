@@ -1,0 +1,362 @@
+[
+{
+    "model": "cities.city",
+    "pk": 1,
+    "fields": {
+        "name": "\u0424\u0435\u043e\u0434\u043e\u0441\u0438\u044f"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 2,
+    "fields": {
+        "name": "\u041a\u043e\u043b\u043e\u043c\u043d\u0430"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 7,
+    "fields": {
+        "name": "\u0412\u043b\u0430\u0434\u0438\u0432\u043e\u0441\u0442\u043e\u043a"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 8,
+    "fields": {
+        "name": "\u041d\u043e\u0432\u043e\u0440\u043e\u0441\u0441\u0438\u0439\u0441\u043a"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 9,
+    "fields": {
+        "name": "\u0420\u044f\u0437\u0430\u043d\u044c-1"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 10,
+    "fields": {
+        "name": "\u0421\u0430\u043c\u0430\u0440\u0430"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 11,
+    "fields": {
+        "name": "\u041a\u043b\u0438\u043d"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 12,
+    "fields": {
+        "name": "\u041a\u0430\u0437\u0430\u043d\u044c"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 13,
+    "fields": {
+        "name": "\u0421\u0432\u0435\u0440\u0434\u043b\u043e\u0432\u0441\u043a"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 14,
+    "fields": {
+        "name": "\u041b\u0443\u0445\u043e\u0432\u0438\u0446\u044b"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 16,
+    "fields": {
+        "name": "\u041c\u0430\u0433\u043d\u0438\u0442\u043e\u0433\u043e\u0440\u0441\u043a"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 17,
+    "fields": {
+        "name": "\u042f\u043b\u0442\u0430"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 18,
+    "fields": {
+        "name": "\u0421\u043e\u0447\u0438"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 19,
+    "fields": {
+        "name": "\u0410\u0440\u0445\u0430\u043d\u0433\u0435\u043b\u044c\u0441\u043a"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 20,
+    "fields": {
+        "name": "\u0410\u0434\u043b\u0435\u0440"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 21,
+    "fields": {
+        "name": "\u0412\u043e\u0440\u043e\u043d\u0435\u0436"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 25,
+    "fields": {
+        "name": "\u041c\u043e\u0441\u043a\u0432\u0430"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 26,
+    "fields": {
+        "name": "\u0427\u0435\u043b\u044f\u0431\u0438\u043d\u0441\u043a"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 27,
+    "fields": {
+        "name": "\u0421\u0430\u0440\u0430\u043d\u0441\u043a"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 28,
+    "fields": {
+        "name": "\u0412\u0438\u043d\u043d\u0438\u0446\u0430"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 29,
+    "fields": {
+        "name": "\u041a\u0438\u0435\u0432"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 30,
+    "fields": {
+        "name": "\u041e\u0434\u0435\u0441\u0441\u0430"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 31,
+    "fields": {
+        "name": "\u0425\u0430\u0440\u044c\u043a\u043e\u0432"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 32,
+    "fields": {
+        "name": "\u0416\u0438\u0442\u043e\u043c\u0438\u0440"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 1,
+    "fields": {
+        "name": "\u041c-\u04201",
+        "from_city": "\u041c\u043e\u0441\u043a\u0432\u0430",
+        "to_city": "\u0420\u044f\u0437\u0430\u043d\u044c-1",
+        "travev_times": 4,
+        "across_cities": [
+            20,
+            18
+        ]
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 2,
+    "fields": {
+        "name": "\u0412-\u0416",
+        "from_city": "\u0412\u0438\u043d\u043d\u0438\u0446\u0430",
+        "to_city": "\u0416\u0438\u0442\u043e\u043c\u0438\u0440",
+        "travev_times": 2,
+        "across_cities": [
+            16
+        ]
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 3,
+    "fields": {
+        "name": "\u0412-\u04251",
+        "from_city": "\u0412\u0438\u043d\u043d\u0438\u0446\u0430",
+        "to_city": "\u0425\u0430\u0440\u044c\u043a\u043e\u0432",
+        "travev_times": 46,
+        "across_cities": [
+            13,
+            17,
+            12
+        ]
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 5,
+    "fields": {
+        "name": "F94",
+        "from_city": 9,
+        "to_city": 14,
+        "travel_time": 2
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 6,
+    "fields": {
+        "name": "C88",
+        "from_city": 11,
+        "to_city": 13,
+        "travel_time": 25
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 8,
+    "fields": {
+        "name": "L49",
+        "from_city": 25,
+        "to_city": 18,
+        "travel_time": 38
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 9,
+    "fields": {
+        "name": "A34",
+        "from_city": 10,
+        "to_city": 2,
+        "travel_time": 23
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 10,
+    "fields": {
+        "name": "J45",
+        "from_city": 1,
+        "to_city": 17,
+        "travel_time": 6
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 11,
+    "fields": {
+        "name": "A753",
+        "from_city": 25,
+        "to_city": 26,
+        "travel_time": 31
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 12,
+    "fields": {
+        "name": "P237",
+        "from_city": 28,
+        "to_city": 29,
+        "travel_time": 23
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 13,
+    "fields": {
+        "name": "B29",
+        "from_city": 29,
+        "to_city": 30,
+        "travel_time": 10
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 14,
+    "fields": {
+        "name": "H15",
+        "from_city": 32,
+        "to_city": 31,
+        "travel_time": 9
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 15,
+    "fields": {
+        "name": "D061",
+        "from_city": 32,
+        "to_city": 28,
+        "travel_time": 3
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 16,
+    "fields": {
+        "name": "E98",
+        "from_city": 28,
+        "to_city": 32,
+        "travel_time": 2
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 17,
+    "fields": {
+        "name": "G33",
+        "from_city": 30,
+        "to_city": 31,
+        "travel_time": 13
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 18,
+    "fields": {
+        "name": "\u041a38",
+        "from_city": 25,
+        "to_city": 2,
+        "travel_time": 2
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 19,
+    "fields": {
+        "name": "P460",
+        "from_city": 25,
+        "to_city": 9,
+        "travel_time": 3
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 20,
+    "fields": {
+        "name": "H72",
+        "from_city": 2,
+        "to_city": 9,
+        "travel_time": 2
+    }
+}
+]
